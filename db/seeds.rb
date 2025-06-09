@@ -449,8 +449,8 @@ puts "\n--- Full Database Seed Process Finished ---"
 
 # 1. Define your admin user's details
 admin_email = "kamdemharry@gmail.com"
-admin_first_name = ""
-admin_last_name = ""
+admin_first_name = "Harry"
+admin_last_name = "Kamdem"
 
 # 2. Find or Create the Admin Donor record
 # Using find_or_create_by! to avoid duplicates and ensure it's created if missing.
