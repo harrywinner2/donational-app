@@ -6,6 +6,7 @@ RSpec.describe Partners::GetDonationsExport, type: :query do
   let(:managed_portfolio) { create(:managed_portfolio) }
   let(:portfolio) { create(:portfolio, managed_portfolio: managed_portfolio) }
   let(:donor) { create(:donor) }
+  let!(:subscription) { create(:subscription, donor: donor, portfolio: portfolio, amount_cents: 1000, frequency: 'monthly') }
   let(:contribution) { create(:contribution, partner: partner, donor: donor, portfolio: portfolio, amount_cents: 100, platform_fees_cents: 100, payment_processor_fees_cents: 100, donor_advised_fund_fees_cents: 100) }
   let!(:donation) { create(:donation, contribution: contribution, organization: organization, created_at: 1.day.ago, amount_cents: 100) }
   let(:donated_between) { 2.days.ago..Time.now }
@@ -16,6 +17,7 @@ RSpec.describe Partners::GetDonationsExport, type: :query do
     context 'when the partner is present' do
       it 'returns the donations export data for the given partner and date range' do
         expect(subject.first.donor_id).to eq(donor.id)
+        expect(subject.first.subscription_id).to eq(subscription.id)
         expect(subject.first.first_name).to eq(donor.first_name)
         expect(subject.first.last_name).to eq(donor.last_name)
         expect(subject.first.email).to eq(donor.email)

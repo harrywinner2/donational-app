@@ -11,10 +11,12 @@ module Partners
         .where(created_at: donated_between)
         .left_joins(:organization)
         .left_joins(portfolio: [:managed_portfolio])
-        .left_joins(contribution: [:donor])
+        .left_joins(contribution: { donor: { subscriptions: { portfolio: [:managed_portfolio] } } })
         .where(contributions: { partner: partner })
+        .where('subscriptions.created_at = (SELECT MAX(s.created_at) FROM subscriptions s WHERE s.donor_id = donors.id)')
         .select(
           'donors.id as donor_id',
+          'subscriptions.id AS subscription_id',
           :first_name,
           :last_name,
           :email,
