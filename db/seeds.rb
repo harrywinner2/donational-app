@@ -448,7 +448,7 @@ puts "\n--- Full Database Seed Process Finished ---"
 # --- In Heroku Rails Console ---
 
 # 1. Define your admin user's details
-admin_email = ""
+admin_email = "kamdemharry@gmail.com"
 admin_first_name = ""
 admin_last_name = ""
 
