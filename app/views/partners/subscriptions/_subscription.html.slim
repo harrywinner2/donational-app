@@ -25,6 +25,7 @@
             a.button.is-static = @view_model.partner.currency
           .control
             = f.number_field :amount_dollars, class: 'input', value: cents_to_dollars(@view_model.subscription.amount_cents)
+        p#amount_warning.help.is-danger style="display: none;" Please enter a positive value.
 
       - unless subscription.started?
         .column
@@ -63,6 +64,7 @@
               a.button.is-static = @view_model.currency
             .control
               = f.number_field :trial_amount_dollars, class: 'input', value: cents_to_dollars(@view_model.subscription.trial_amount_cents)
+          p#amount_warning.help.is-danger style="display: none;" Please enter a positive value.
         .column
           .field
             .label Active since
